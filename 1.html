@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #l {
+            width: 0%;
+            height: 10px;
+            background: red;
+            transition: all .3s;
+            border-radius: 5px;
+        }
+
+        #box {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="l"></div>
+    <div id="box">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+        <img src="https://img2018.cnblogs.com/news/24442/201811/24442-20181129113406214-695115565.jpg" alt="">
+    </div>
+
+</body>
+
+<script>
+    // var img = document.querySelectorAll('img');
+    // var len = img.length;
+    // var num = 0;
+    // var logins = 0;
+    // for (var i = 0; i < len; i++) {
+    //     imgs(i);
+    // };
+
+    // function imgs(i) {
+    //     img[i].onload = function () {
+    //         setTimeout(function () {
+    //             num++;
+    //             logins = (num * 100 / len).toFixed(2);
+    //             l.innerHTML = logins;
+    //             l.style = 'width:' + logins + '%';
+    //             if (logins === 100) {
+    //                 box.style = 'display:block;';
+    //             };
+    //         }, 1000);
+    //     };
+    // };
+
+    var num1 = 0;//初始百分比值
+    var tiemr = null;//定时器
+    var num = 100;//最终值
+    document.onreadystatechange = function () {
+        if (document.readyState === 'complete') {
+            clearInterval(tiemr);
+            num1 = num;
+            run(true);
+        };
+    };//监听页面状态
+    // document.onreadystatechange：document.resdyState属于属性值改变的时候自动调用
+
+    if (document.readyState === 'interactive' || document.readyState === 'loading') {
+        tiemr = setInterval(() => {
+            num1++;
+            num1 = num1 > num ? num : num1++;
+            run();
+        }, 50);
+    };// interactive:文档已经加载完成，文档已被解析，但是比如图片样式等还在加载中
+    // loading:仍在加载中
+
+    function run(flag){
+        l.style = 'width:' + num1 + '%';
+        l.innerHTML = num1 + '%';
+
+        if(flag){
+            l.style = 'width:100%';
+            box.style = 'display:block;';
+            setTimeout(function(){
+                l.style = 'display:none;'; 
+            },500);
+        };//当页面加载结束时，num1还没加到最大值，避免这种情况直接赋值到最大值
+
+    };//结束事件
+
+</script>
+
+</html>
